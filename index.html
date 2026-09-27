@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>LIBRETA CUADROVÍA · Lamela</title>
+  <style>
+    @font-face {
+      font-family: 'Escolar';
+      src: url('Escolar_N.TTF') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    :root {
+      --paper: #faf6f0;
+      --grid: #d4c4a8;
+      --grid-strong: #b89b6e;
+      --margin: #e8d9c0;
+      --lamela: #c9b48a;
+      --accent: #2c5aa0;
+      --accent-hover: #1e3f73;
+      --menu-bg: rgba(255,252,247,0.97);
+      --shadow: 0 10px 40px rgba(60,40,20,0.18);
+      --grid-size: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: #e8dfd0;
+    }
+
+    #workspace {
+      position: absolute;
+      inset: 0;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      background: var(--paper);
+    }
+
+    #paper {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(var(--grid-strong) 3px, transparent 3px),
+        linear-gradient(var(--grid-strong) 3px, transparent 3px);
+      background-size:
+        var(--grid-size) var(--grid-size),
+        var(--grid-size) var(--grid-size),
+        100% calc(var(--grid-size) * 4),
+        100% calc(var(--grid-size) * 4);
+      background-position:
+        48px 0,
+        48px 0,
+        48px 0,
+        48px var(--grid-size);
+    }
+
+    #paper::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 48px; height: 100%;
+      background: var(--margin);
+      border-right: 1px solid var(--grid-strong);
+      z-index: 1;
+      background-image: radial-gradient(circle at 24px 12px, #f5ebe0 5px, transparent 5.5px);
+      background-size: 48px 28px;
+      background-repeat: repeat-y;
+    }
+
+    #paper::after {
+      content: "LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELAELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · LAMELA · 
+      position: absolute;
+      top: 0; left: 0;
+      width: 48px; height: 100%;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: var(--lamela);
+      text-align: center;
+      padding-top: 20px;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      touch-action: none;
+      z-index: 5;
+    }
+
+    #text-layer {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 12;
+      pointer-events: none;
+    }
+
+    .text-object {
+      position: absolute;
+      font-family: 'Escolar', "Segoe UI", system-ui, sans-serif;
+      white-space: pre;
+      padding: 4px 6px;
+      border-radius: 4px;
+      min-width: 30px;
+      line-height: 1.25;
+      background: transparent;
+      border: 2px solid transparent;
+      transition: border-color 0.15s, background 0.15s;
+      pointer-events: none; /* por defecto no interactivo */
+    }
+
+    /* Solo interactivo cuando el modo Texto está activo */
+    body.tool-text .text-object {
+      pointer-events: auto;
+      cursor: move;
+    }
+
+    .text-object.selected {
+      border-color: var(--accent);
+      background: rgba(44, 90, 160, 0.10);
+    }
+
+    .text-object.editing {
+      border-color: var(--accent);
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      cursor: text;
+    }
+
+    /* Botón borrar del texto seleccionado */
+    .text-delete-btn {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #ef4444;
+      color: white;
+      border: none;
+      font-size: 14px;
+      cursor: pointer;
+      display: none;
+      z-index: 20;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      align-items: center;
+      justify-content: center;
+    }
+    .text-delete-btn:hover {
+      background: #dc2626;
+    }
+
+    /* Control de tamaño al editar */
+    #text-size-control {
+      position: absolute;
+      display: none;
+      background: white;
+      padding: 8px 12px;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      z-index: 60;
+      gap: 8px;
+      align-items: center;
+      font-size: 13px;
+    }
+    #text-size-control input {
+      width: 90px;
+      accent-color: var(--accent);
+    }
+
+    #selection-box {
+      position: absolute;
+      border: 2px dashed var(--accent);
+      background: rgba(44, 90, 160, 0.10);
+      pointer-events: none;
+      display: none;
+      z-index: 15;
+    }
+
+    #fullscreen-btn {
+      position: fixed;
+      top: 14px; left: 14px;
+      z-index: 1000;
+      width: 48px; height: 48px;
+      border: none; border-radius: 14px;
+      background: var(--menu-bg);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      transition: all 0.2s;
+    }
+    #fullscreen-btn:hover {
+      background: #fff;
+      transform: scale(1.07);
+    }
+
+    #toolbar {
+      position: fixed;
+      top: 78px; right: 16px;
+      z-index: 900;
+      width: 300px;
+      background: var(--menu-bg);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      overflow: hidden;
+      border: 1px solid rgba(180,150,100,0.25);
+      transition: width 0.28s cubic-bezier(0.4,0,0.2,1), height 0.28s;
+      display: flex;
+      flex-direction: column;
+    }
+    #toolbar.minimized {
+      width: 54px;
+      height: 54px;
+    }
+
+    #toolbar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      background: linear-gradient(135deg, #3a5a80, #2c5aa0);
+      color: white;
+      cursor: grab;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.6px;
+    }
+    #toolbar-header:active { cursor: grabbing; }
+    #toolbar.minimized #toolbar-header {
+      justify-content: center;
+      padding: 0;
+      height: 54px;
+    }
+    #toolbar-title { white-space: nowrap; overflow: hidden; }
+    #toolbar.minimized #toolbar-title { display: none; }
+
+    #minimize-btn {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      width: 32px; height: 32px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #minimize-btn:hover { background: rgba(255,255,255,0.35); }
+
+    #toolbar-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: calc(100vh - 160px);
+      overflow-y: auto;
+    }
+    #toolbar.minimized #toolbar-body { display: none; }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #8a7355;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 2px;
+    }
+
+    .tool-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .tool-btn {
+      width: 40px; height: 40px;
+      border: 2px solid transparent;
+      border-radius: 11px;
+      background: #f3ebe0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: all 0.15s;
+      color: #4a3f32;
+    }
+    .tool-btn:hover { background: #e8dcc8; }
+    .tool-btn.active {
+      background: #d6e4f7;
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    input[type="color"] {
+      width: 40px; height: 40px;
+      border: none; border-radius: 11px;
+      cursor: pointer; padding: 0; background: none;
+    }
+    input[type="color"]::-webkit-color-swatch-wrapper { padding: 3px; }
+    input[type="color"]::-webkit-color-swatch {
+      border-radius: 8px;
+      border: 2px solid #c9b48a;
+    }
+
+    input[type="range"] {
+      flex: 1;
+      accent-color: var(--accent);
+    }
+
+    .size-display {
+      font-size: 13px;
+      color: #5c4e3a;
+      min-width: 32px;
+      text-align: right;
+      font-weight: 700;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #5c4e3a;
+      font-weight: 500;
+    }
+    .toggle-row input {
+      accent-color: var(--accent);
+      width: 16px; height: 16px;
+    }
+
+    .action-btn {
+      flex: 1;
+      min-width: 72px;
+      height: 38px;
+      border: none;
+      border-radius: 10px;
+      background: #f3ebe0;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      color: #4a3f32;
+      transition: all 0.15s;
+    }
+    .action-btn:hover { background: #e8dcc8; }
+    .action-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .action-btn.primary {
+      background: var(--accent);
+      color: white;
+    }
+    .action-btn.primary:hover { background: var(--accent-hover); }
+    .action-btn.danger {
+      background: #f8e0d8;
+      color: #a33a2a;
+    }
+    .action-btn.danger:hover { background: #f0cdc0; }
+
+    #text-input {
+      position: absolute;
+      z-index: 50;
+      display: none;
+      min-width: 140px;
+      padding: 8px 12px;
+      font-size: 18px;
+      font-family: 'Escolar', "Segoe UI", system-ui, sans-serif;
+      border: 2px solid var(--accent);
+      border-radius: 8px;
+      background: #fff;
+      outline: none;
+      color: #1e293b;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    #page-indicator {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(60,40,20,0.82);
+      color: #faf6f0;
+      padding: 7px 18px;
+      border-radius: 24px;
+      font-size: 13px;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+
+    @media (max-width: 600px) {
+      #toolbar {
+        width: min(300px, calc(100vw - 18px));
+        right: 9px;
+        top: 70px;
+      }
+      #fullscreen-btn {
+        top: 10px; left: 10px;
+        width: 44px; height: 44px;
+      }
+      #paper::before, #paper::after { width: 40px; }
+      #paper {
+        background-position: 40px 0, 40px 0, 40px 0, 40px var(--grid-size);
+      }
+    }
+
+    body.tool-pen { cursor: crosshair; }
+    body.tool-eraser { cursor: cell; }
+    body.tool-select { cursor: crosshair; }
+    body.tool-text { cursor: text; }
+    body.tool-line, body.tool-rect, body.tool-circle,
+    body.tool-ellipse, body.tool-triangle,
+    body.tool-heart, body.tool-star { cursor: crosshair; }
+  </style>
+</head>
+<body>
+  <button id="fullscreen-btn" title="Pantalla completa">⛶</button>
+
+  <div id="toolbar">
+    <div id="toolbar-header">
+      <span id="toolbar-title">LIBRETA CUADROVÍA</span>
+      <button id="minimize-btn" title="Minimizar">−</button>
+    </div>
+    <div id="toolbar-body">
+
+      <div class="section-label">Herramientas</div>
+      <div class="tool-row">
+        <button class="tool-btn active" data-tool="pen" title="Lápiz">✏️</button>
+        <button class="tool-btn" data-tool="eraser" title="Borrador">🧽</button>
+        <button class="tool-btn" data-tool="text" title="Texto">T</button>
+        <button class="tool-btn" data-tool="select" title="Seleccionar zona">⬚</button>
+        <button class="tool-btn" data-tool="line" title="Línea">／</button>
+        <button class="tool-btn" data-tool="rect" title="Rectángulo">▭</button>
+        <button class="tool-btn" data-tool="circle" title="Círculo">○</button>
+        <button class="tool-btn" data-tool="ellipse" title="Elipse">⬭</button>
+        <button class="tool-btn" data-tool="triangle" title="Triángulo">△</button>
+        <button class="tool-btn" data-tool="heart" title="Corazón">♥</button>
+        <button class="tool-btn" data-tool="star" title="Estrella">★</button>
+      </div>
+
+      <div class="section-label">Color y grosor</div>
+      <div class="tool-row">
+        <input type="color" id="color-picker" value="#1e293b" title="Color del trazo">
+        <input type="color" id="fill-color" value="#93c5fd" title="Color de relleno">
+        <input type="range" id="size-slider" min="1" max="50" value="3">
+        <span class="size-display" id="size-value">3</span>
+      </div>
+
+      <div class="toggle-row">
+        <input type="checkbox" id="fill-toggle">
+        <label for="fill-toggle">Rellenar formas</label>
+      </div>
+
+      <div class="section-label">Tamaño de la cuadrícula</div>
+      <div class="tool-row">
+        <input type="range" id="grid-slider" min="12" max="40" value="20" step="2">
+        <span class="size-display" id="grid-value">20</span>
+      </div>
+
+      <div class="section-label">Acciones</div>
+      <div class="tool-row">
+        <button class="action-btn" id="undo-btn" disabled>↶ Deshacer</button>
+        <button class="action-btn" id="redo-btn" disabled>↷ Rehacer</button>
+      </div>
+      <div class="tool-row">
+        <button class="action-btn danger" id="clear-btn">🗑 Limpiar</button>
+        <button class="action-btn primary" id="save-btn">💾 Guardar</button>
+      </div>
+      <div class="tool-row">
+        <button class="action-btn" id="save-selection-btn" disabled>✂ Guardar selección</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Control de tamaño al editar texto -->
+  <div id="text-size-control">
+    <span>Tamaño:</span>
+    <input type="range" id="edit-size-slider" min="12" max="72" value="24">
+    <span id="edit-size-value">24</span>
+  </div>
+
+  <div id="workspace">
+    <div id="paper">
+      <canvas id="draw-canvas"></canvas>
+      <div id="text-layer"></div>
+      <div id="selection-box"></div>
+      <input type="text" id="text-input" placeholder="Escribe y pulsa Enter...">
+    </div>
+  </div>
+
+  <div id="page-indicator">Página infinita · desplázate hacia abajo</div>
+
+  <script>
+    // ========== CONFIG ==========
+    const INITIAL_PAGES = 2.6;
+    const EXTEND_THRESHOLD = 0.72;
+    const EXTEND_AMOUNT = 1.5;
+    const MARGIN_WIDTH = 48;
+
+    // ========== ELEMENTOS ==========
+    const workspace = document.getElementById('workspace');
+    const paper = document.getElementById('paper');
+    const canvas = document.getElementById('draw-canvas');
+    const ctx = canvas.getContext('2d');
+    const textLayer = document.getElementById('text-layer');
+    const selectionBox = document.getElementById('selection-box');
+    const textInput = document.getElementById('text-input');
+    const textSizeControl = document.getElementById('text-size-control');
+    const editSizeSlider = document.getElementById('edit-size-slider');
+    const editSizeValue = document.getElementById('edit-size-value');
+    const toolbar = document.getElementById('toolbar');
+    const toolbarHeader = document.getElementById('toolbar-header');
+    const minimizeBtn = document.getElementById('minimize-btn');
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+    const colorPicker = document.getElementById('color-picker');
+    const fillColorPicker = document.getElementById('fill-color');
+    const sizeSlider = document.getElementById('size-slider');
+    const sizeValue = document.getElementById('size-value');
+    const gridSlider = document.getElementById('grid-slider');
+    const gridValue = document.getElementById('grid-value');
+    const fillToggle = document.getElementById('fill-toggle');
+    const undoBtn = document.getElementById('undo-btn');
+    const redoBtn = document.getElementById('redo-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const saveBtn = document.getElementById('save-btn');
+    const saveSelectionBtn = document.getElementById('save-selection-btn');
+    const pageIndicator = document.getElementById('page-indicator');
+
+    // ========== ESTADO ==========
+    let currentTool = 'pen';
+    let isDrawing = false;
+    let lastX = 0, lastY = 0;
+    let startX = 0, startY = 0;
+    let color = '#1e293b';
+    let fillColor = '#93c5fd';
+    let lineWidth = 3;
+    let fillShapes = false;
+    let gridSize = 20;
+
+    let history = [];
+    let historyIndex = -1;
+    const MAX_HISTORY = 40;
+
+    let selection = null;
+    let lastSnapshot = null;
+
+    // Textos
+    let texts = [];
+    let selectedText = null;
+    let isDraggingText = false;
+    let dragStartX = 0, dragStartY = 0;
+    let textStartX = 0, textStartY = 0;
+    let nextTextId = 1;
+    let deleteBtn = null;
+
+    let isDraggingToolbar = false;
+    let dragOffsetX = 0, dragOffsetY = 0;
+
+    // ========== CANVAS ==========
+    function resizeCanvas(height) {
+      const dpr = window.devicePixelRatio || 1;
+      const width = workspace.clientWidth;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      paper.style.height = height + 'px';
+      textLayer.style.height = height + 'px';
+    }
+
+    function init() {
+      const h = Math.max(workspace.clientHeight * INITIAL_PAGES, workspace.clientHeight + 280);
+      resizeCanvas(h);
+      saveState();
+    }
+
+    function extendIfNeeded() {
+      const scrollBottom = workspace.scrollTop + workspace.clientHeight;
+      const currentH = parseFloat(paper.style.height) || paper.offsetHeight;
+      if (scrollBottom > currentH * EXTEND_THRESHOLD) {
+        const add = workspace.clientHeight * EXTEND_AMOUNT;
+        const newH = currentH + add;
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        resizeCanvas(newH);
+        ctx.putImageData(imgData, 0, 0);
+        pageIndicator.style.opacity = '1';
+        setTimeout(() => pageIndicator.style.opacity = '0', 1500);
+      }
+    }
+
+    // ========== HISTORIAL ==========
+    function saveState() {
+      if (historyIndex < history.length - 1) {
+        history = history.slice(0, historyIndex + 1);
+      }
+      history.push(canvas.toDataURL('image/png'));
+      if (history.length > MAX_HISTORY) history.shift();
+      else historyIndex++;
+      updateButtons();
+    }
+
+    function restoreState(idx) {
+      if (idx < 0 || idx >= history.length) return;
+      const img = new Image();
+      img.onload = () => {
+        const dpr = window.devicePixelRatio || 1;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+        ctx.drawImage(img, 0, 0, canvas.width / dpr, canvas.height / dpr);
+      };
+      img.src = history[idx];
+      historyIndex = idx;
+      updateButtons();
+    }
+
+    function updateButtons() {
+      undoBtn.disabled = historyIndex <= 0;
+      redoBtn.disabled = historyIndex >= history.length - 1;
+    }
+
+    // ========== TEXTOS (solo interactivos en modo Texto) ==========
+    function createText(x, y, content, size, col) {
+      const id = nextTextId++;
+      const el = document.createElement('div');
+      el.className = 'text-object';
+      el.style.left = x + 'px';
+      el.style.top = y + 'px';
+      el.style.fontSize = size + 'px';
+      el.style.color = col;
+      el.textContent = content;
+
+      const obj = { id, x, y, content, size, color: col, el };
+      texts.push(obj);
+      textLayer.appendChild(el);
+
+      // Eventos (solo funcionan cuando body tiene .tool-text)
+      el.addEventListener('pointerdown', (e) => {
+        if (currentTool !== 'text') return;
+        e.stopPropagation();
+        e.preventDefault();
+
+        selectText(obj);
+        isDraggingText = true;
+        dragStartX = e.clientX;
+        dragStartY = e.clientY;
+        textStartX = obj.x;
+        textStartY = obj.y;
+        el.setPointerCapture(e.pointerId);
+      });
+
+      el.addEventListener('pointermove', (e) => {
+        if (!isDraggingText || selectedText !== obj || currentTool !== 'text') return;
+        e.preventDefault();
+
+        const dx = e.clientX - dragStartX;
+        const dy = e.clientY - dragStartY;
+
+        obj.x = textStartX + dx;
+        obj.y = textStartY + dy;
+        el.style.left = obj.x + 'px';
+        el.style.top = obj.y + 'px';
+
+        // Mover también el botón de borrar
+        positionDeleteBtn();
+      });
+
+      el.addEventListener('pointerup', (e) => {
+        if (isDraggingText) {
+          isDraggingText = false;
+          try { el.releasePointerCapture(e.pointerId); } catch(err) {}
+        }
+      });
+
+      el.addEventListener('pointercancel', () => {
+        isDraggingText = false;
+      });
+
+      // Un solo toque = seleccionar (ya se hace en pointerdown)
+      // Doble toque = editar
+      let lastTap = 0;
+      el.addEventListener('click', (e) => {
+        if (currentTool !== 'text') return;
+        e.stopPropagation();
+        const now = Date.now();
+        if (now - lastTap < 300) {
+          startEdit(obj);
+        }
+        lastTap = now;
+      });
+
+      return obj;
+    }
+
+    function selectText(obj) {
+      // Quitar selección anterior
+      if (selectedText && selectedText !== obj) {
+        selectedText.el.classList.remove('selected');
+      }
+      selectedText = obj;
+      if (obj) {
+        obj.el.classList.add('selected');
+        showDeleteBtn(obj);
+      } else {
+        hideDeleteBtn();
+      }
+    }
+
+    function deselectText() {
+      if (selectedText) {
+        selectedText.el.classList.remove('selected');
+        selectedText = null;
+      }
+      hideDeleteBtn();
+      hideSizeControl();
+    }
+
+    function showDeleteBtn(obj) {
+      if (!deleteBtn) {
+        deleteBtn = document.createElement('button');
+        deleteBtn.className = 'text-delete-btn';
+        deleteBtn.innerHTML = '🗑';
+        deleteBtn.title = 'Borrar texto';
+        paper.appendChild(deleteBtn);
+
+        deleteBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (selectedText) {
+            selectedText.el.remove();
+            texts = texts.filter(t => t.id !== selectedText.id);
+            deselectText();
+          }
+        });
+      }
+      deleteBtn.style.display = 'flex';
+      positionDeleteBtn();
+    }
+
+    function positionDeleteBtn() {
+      if (!deleteBtn || !selectedText) return;
+      deleteBtn.style.left = (selectedText.x + selectedText.el.offsetWidth + 6) + 'px';
+      deleteBtn.style.top = (selectedText.y - 4) + 'px';
+    }
+
+    function hideDeleteBtn() {
+      if (deleteBtn) deleteBtn.style.display = 'none';
+    }
+
+    function startEdit(obj) {
+      selectText(obj);
+      obj.el.classList.add('editing');
+      obj.el.contentEditable = true;
+      obj.el.focus();
+
+      // Mostrar control de tamaño
+      showSizeControl(obj);
+
+      const range = document.createRange();
+      range.selectNodeContents(obj.el);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+
+      const finish = () => {
+        obj.el.contentEditable = false;
+        obj.el.classList.remove('editing');
+        obj.content = obj.el.textContent || '';
+        obj.el.removeEventListener('blur', finish);
+        obj.el.removeEventListener('keydown', onKey);
+        hideSizeControl();
+      };
+
+      const onKey = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          finish();
+        }
+        if (e.key === 'Escape') {
+          obj.el.textContent = obj.content;
+          finish();
+        }
+      };
+
+      obj.el.addEventListener('blur', finish);
+      obj.el.addEventListener('keydown', onKey);
+    }
+
+    function showSizeControl(obj) {
+      editSizeSlider.value = obj.size;
+      editSizeValue.textContent = obj.size;
+      textSizeControl.style.display = 'flex';
+
+      // Posicionar cerca del texto
+      textSizeControl.style.left = Math.max(10, obj.x) + 'px';
+      textSizeControl.style.top = Math.max(10, obj.y - 50) + 'px';
+
+      editSizeSlider.oninput = () => {
+        const newSize = +editSizeSlider.value;
+        editSizeValue.textContent = newSize;
+        obj.size = newSize;
+        obj.el.style.fontSize = newSize + 'px';
+        positionDeleteBtn();
+      };
+    }
+
+    function hideSizeControl() {
+      textSizeControl.style.display = 'none';
+    }
+
+    // ========== DIBUJO ==========
+    function getPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
+
+    function updateSelectionBox() {
+      if (!selection || selection.w < 5 || selection.h < 5) {
+        selectionBox.style.display = 'none';
+        saveSelectionBtn.disabled = true;
+        return;
+      }
+      selectionBox.style.display = 'block';
+      selectionBox.style.left = selection.x + 'px';
+      selectionBox.style.top = selection.y + 'px';
+      selectionBox.style.width = selection.w + 'px';
+      selectionBox.style.height = selection.h + 'px';
+      saveSelectionBtn.disabled = false;
+    }
+
+    function clearSelection() {
+      selection = null;
+      updateSelectionBox();
+    }
+
+    function startDraw(e) {
+      if (currentTool === 'text') return;
+      if (e.target && e.target.closest && e.target.closest('.text-object')) return;
+
+      e.preventDefault();
+      const pos = getPos(e);
+      isDrawing = true;
+      lastX = startX = pos.x;
+      lastY = startY = pos.y;
+
+      deselectText();
+
+      if (currentTool === 'select') {
+        clearSelection();
+      } else if (['line','rect','circle','ellipse','triangle','heart','star'].includes(currentTool)) {
+        lastSnapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      e.preventDefault();
+      const pos = getPos(e);
+
+      if (currentTool === 'pen' || currentTool === 'eraser') {
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.globalCompositeOperation = currentTool === 'eraser' ? 'destination-out' : 'source-over';
+        ctx.strokeStyle = color;
+        ctx.lineWidth = currentTool === 'eraser' ? Math.max(lineWidth * 5, 16) : lineWidth;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.stroke();
+        ctx.globalCompositeOperation = 'source-over';
+        lastX = pos.x;
+        lastY = pos.y;
+      } else if (currentTool === 'select') {
+        const x = Math.min(startX, pos.x);
+        const y = Math.min(startY, pos.y);
+        const w = Math.abs(pos.x - startX);
+        const h = Math.abs(pos.y - startY);
+        selection = { x, y, w, h };
+        updateSelectionBox();
+      } else {
+        if (lastSnapshot) ctx.putImageData(lastSnapshot, 0, 0);
+        drawShape(startX, startY, pos.x, pos.y);
+      }
+    }
+
+    function endDraw(e) {
+      if (!isDrawing) return;
+      isDrawing = false;
+      lastSnapshot = null;
+
+      if (currentTool !== 'select') {
+        saveState();
+      }
+    }
+
+    function drawShape(x1, y1, x2, y2) {
+      ctx.strokeStyle = color;
+      ctx.fillStyle = fillColor;
+      ctx.lineWidth = lineWidth;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.globalCompositeOperation = 'source-over';
+
+      const dx = x2 - x1;
+      const dy = y2 - y1;
+
+      if (currentTool === 'line') {
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      } else if (currentTool === 'rect') {
+        const x = Math.min(x1, x2), y = Math.min(y1, y2);
+        const w = Math.abs(dx), h = Math.abs(dy);
+        if (fillShapes) ctx.fillRect(x, y, w, h);
+        ctx.strokeRect(x, y, w, h);
+      } else if (currentTool === 'circle') {
+        const r = Math.hypot(dx, dy);
+        ctx.beginPath();
+        ctx.arc(x1, y1, r, 0, Math.PI * 2);
+        if (fillShapes) ctx.fill();
+        ctx.stroke();
+      } else if (currentTool === 'ellipse') {
+        const rx = Math.abs(dx) / 2, ry = Math.abs(dy) / 2;
+        ctx.beginPath();
+        ctx.ellipse((x1 + x2) / 2, (y1 + y2) / 2, rx, ry, 0, 0, Math.PI * 2);
+        if (fillShapes) ctx.fill();
+        ctx.stroke();
+      } else if (currentTool === 'triangle') {
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.lineTo(x1 - dx, y2);
+        ctx.closePath();
+        if (fillShapes) ctx.fill();
+        ctx.stroke();
+      } else if (currentTool === 'heart') {
+        const size = Math.max(Math.abs(dx), Math.abs(dy)) / 1.6;
+        drawHeart((x1 + x2) / 2, (y1 + y2) / 2, size);
+      } else if (currentTool === 'star') {
+        const size = Math.max(Math.abs(dx), Math.abs(dy)) / 1.5;
+        drawStar((x1 + x2) / 2, (y1 + y2) / 2, size);
+      }
+    }
+
+    function drawHeart(cx, cy, size) {
+      ctx.beginPath();
+      ctx.moveTo(cx, cy + size * 0.3);
+      ctx.bezierCurveTo(cx - size, cy - size * 0.3, cx - size, cy + size * 0.4, cx, cy + size);
+      ctx.bezierCurveTo(cx + size, cy + size * 0.4, cx + size, cy - size * 0.3, cx, cy + size * 0.3);
+      ctx.closePath();
+      if (fillShapes) ctx.fill();
+      ctx.stroke();
+    }
+
+    function drawStar(cx, cy, size) {
+      const spikes = 5;
+      const outer = size;
+      const inner = size * 0.4;
+      let rot = Math.PI / 2 * 3;
+      const step = Math.PI / spikes;
+
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - outer);
+      for (let i = 0; i < spikes; i++) {
+        ctx.lineTo(cx + Math.cos(rot) * outer, cy + Math.sin(rot) * outer);
+        rot += step;
+        ctx.lineTo(cx + Math.cos(rot) * inner, cy + Math.sin(rot) * inner);
+        rot += step;
+      }
+      ctx.closePath();
+      if (fillShapes) ctx.fill();
+      ctx.stroke();
+    }
+
+    // ========== NUEVO TEXTO ==========
+    canvas.addEventListener('click', (e) => {
+      if (currentTool !== 'text') return;
+      if (e.target.closest('.text-object')) return;
+
+      const pos = getPos(e);
+      textInput.style.display = 'block';
+      textInput.style.left = (pos.x + 10) + 'px';
+      textInput.style.top = (pos.y - 10) + 'px';
+      textInput.style.color = color;
+      textInput.style.fontSize = Math.max(18, lineWidth * 6) + 'px';
+      textInput.value = '';
+      textInput.focus();
+
+      textInput.dataset.x = pos.x;
+      textInput.dataset.y = pos.y;
+    });
+
+    textInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        finishNewText();
+      } else if (e.key === 'Escape') {
+        textInput.style.display = 'none';
+      }
+    });
+
+    textInput.addEventListener('blur', () => {
+      setTimeout(() => {
+        if (textInput.style.display !== 'none') finishNewText();
+      }, 150);
+    });
+
+    function finishNewText() {
+      if (textInput.style.display === 'none') return;
+      const content = textInput.value.trim();
+      textInput.style.display = 'none';
+      if (!content) return;
+
+      const x = parseFloat(textInput.dataset.x) || 50;
+      const y = parseFloat(textInput.dataset.y) || 50;
+      const size = Math.max(18, lineWidth * 6);
+
+      createText(x, y, content, size, color);
+    }
+
+    // ========== EVENTOS ==========
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', endDraw);
+    canvas.addEventListener('mouseleave', endDraw);
+
+    canvas.addEventListener('touchstart', startDraw, { passive: false });
+    canvas.addEventListener('touchmove', draw, { passive: false });
+    canvas.addEventListener('touchend', endDraw);
+    canvas.addEventListener('touchcancel', endDraw);
+
+    // ========== CONTROLES ==========
+    document.querySelectorAll('.tool-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentTool = btn.dataset.tool;
+        document.body.className = 'tool-' + currentTool;
+        textInput.style.display = 'none';
+        deselectText();
+        if (currentTool !== 'select') clearSelection();
+      });
+    });
+
+    colorPicker.addEventListener('input', () => color = colorPicker.value);
+    fillColorPicker.addEventListener('input', () => fillColor = fillColorPicker.value);
+    sizeSlider.addEventListener('input', () => {
+      lineWidth = +sizeSlider.value;
+      sizeValue.textContent = lineWidth;
+    });
+    fillToggle.addEventListener('change', () => fillShapes = fillToggle.checked);
+
+    gridSlider.addEventListener('input', () => {
+      gridSize = +gridSlider.value;
+      gridValue.textContent = gridSize;
+      document.documentElement.style.setProperty('--grid-size', gridSize + 'px');
+    });
+
+    undoBtn.addEventListener('click', () => {
+      if (historyIndex > 0) {
+        restoreState(historyIndex - 1);
+        clearSelection();
+      }
+    });
+    redoBtn.addEventListener('click', () => {
+      if (historyIndex < history.length - 1) {
+        restoreState(historyIndex + 1);
+        clearSelection();
+      }
+    });
+
+    clearBtn.addEventListener('click', () => {
+      if (confirm('¿Borrar todos los dibujos y textos?')) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        texts.forEach(t => t.el.remove());
+        texts = [];
+        deselectText();
+        clearSelection();
+        saveState();
+      }
+    });
+
+    saveBtn.addEventListener('click', () => {
+      const dpr = window.devicePixelRatio || 1;
+      const exportCanvas = document.createElement('canvas');
+      exportCanvas.width = canvas.width;
+      exportCanvas.height = canvas.height;
+      const ectx = exportCanvas.getContext('2d');
+
+      ectx.fillStyle = '#faf6f0';
+      ectx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+
+      const w = canvas.width / dpr;
+      const h = canvas.height / dpr;
+
+      ectx.strokeStyle = '#d4c4a8';
+      ectx.lineWidth = 1 * dpr;
+      for (let x = MARGIN_WIDTH; x < w; x += gridSize) {
+        ectx.beginPath();
+        ectx.moveTo(x * dpr, 0);
+        ectx.lineTo(x * dpr, h * dpr);
+        ectx.stroke();
+      }
+      for (let y = 0; y < h; y += gridSize) {
+        ectx.beginPath();
+        ectx.moveTo(MARGIN_WIDTH * dpr, y * dpr);
+        ectx.lineTo(w * dpr, y * dpr);
+        ectx.stroke();
+      }
+
+      ectx.strokeStyle = '#b89b6e';
+      ectx.lineWidth = 3 * dpr;
+      for (let y = 0; y < h; y += gridSize * 4) {
+        ectx.beginPath();
+        ectx.moveTo(MARGIN_WIDTH * dpr, y * dpr);
+        ectx.lineTo(w * dpr, y * dpr);
+        ectx.stroke();
+        ectx.beginPath();
+        ectx.moveTo(MARGIN_WIDTH * dpr, (y + gridSize) * dpr);
+        ectx.lineTo(w * dpr, (y + gridSize) * dpr);
+        ectx.stroke();
+      }
+
+      ectx.fillStyle = '#e8d9c0';
+      ectx.fillRect(0, 0, MARGIN_WIDTH * dpr, h * dpr);
+      ectx.drawImage(canvas, 0, 0);
+
+      texts.forEach(t => {
+        ectx.font = `${t.size}px Escolar, Segoe UI, sans-serif`;
+        ectx.fillStyle = t.color;
+        ectx.fillText(t.content, t.x * dpr, (t.y + t.size * 0.85) * dpr);
+      });
+
+      const link = document.createElement('a');
+      link.download = `libreta-cuadrovía-${Date.now()}.png`;
+      link.href = exportCanvas.toDataURL('image/png');
+      link.click();
+    });
+
+    saveSelectionBtn.addEventListener('click', () => {
+      if (!selection || selection.w < 5 || selection.h < 5) return;
+
+      const dpr = window.devicePixelRatio || 1;
+      const temp = document.createElement('canvas');
+      temp.width = Math.floor(selection.w * dpr);
+      temp.height = Math.floor(selection.h * dpr);
+      const tctx = temp.getContext('2d');
+
+      tctx.fillStyle = '#faf6f0';
+      tctx.fillRect(0, 0, temp.width, temp.height);
+
+      tctx.drawImage(
+        canvas,
+        selection.x * dpr, selection.y * dpr,
+        selection.w * dpr, selection.h * dpr,
+        0, 0, temp.width, temp.height
+      );
+
+      texts.forEach(t => {
+        if (t.x >= selection.x && t.x <= selection.x + selection.w &&
+            t.y >= selection.y && t.y <= selection.y + selection.h) {
+          tctx.font = `${t.size}px Escolar, Segoe UI, sans-serif`;
+          tctx.fillStyle = t.color;
+          tctx.fillText(t.content, (t.x - selection.x) * dpr, (t.y - selection.y + t.size * 0.85) * dpr);
+        }
+      });
+
+      const link = document.createElement('a');
+      link.download = `seleccion-cuadrovía-${Date.now()}.png`;
+      link.href = temp.toDataURL('image/png');
+      link.click();
+    });
+
+    // ========== MENÚ ==========
+    minimizeBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      toolbar.classList.toggle('minimized');
+      minimizeBtn.textContent = toolbar.classList.contains('minimized') ? '+' : '−';
+    });
+
+    function startDrag(e) {
+      if (e.target === minimizeBtn) return;
+      isDraggingToolbar = true;
+      const rect = toolbar.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      dragOffsetX = clientX - rect.left;
+      dragOffsetY = clientY - rect.top;
+      toolbar.style.transition = 'none';
+    }
+    function moveDrag(e) {
+      if (!isDraggingToolbar) return;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      let x = clientX - dragOffsetX;
+      let y = clientY - dragOffsetY;
+      x = Math.max(0, Math.min(window.innerWidth - toolbar.offsetWidth, x));
+      y = Math.max(0, Math.min(window.innerHeight - 50, y));
+      toolbar.style.left = x + 'px';
+      toolbar.style.top = y + 'px';
+      toolbar.style.right = 'auto';
+    }
+    function endDrag() {
+      isDraggingToolbar = false;
+      toolbar.style.transition = '';
+    }
+
+    toolbarHeader.addEventListener('mousedown', startDrag);
+    document.addEventListener('mousemove', moveDrag);
+    document.addEventListener('mouseup', endDrag);
+    toolbarHeader.addEventListener('touchstart', startDrag, { passive: true });
+    document.addEventListener('touchmove', moveDrag, { passive: true });
+    document.addEventListener('touchend', endDrag);
+
+    fullscreenBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen?.() || document.documentElement.webkitRequestFullscreen?.();
+      } else {
+        document.exitFullscreen?.() || document.webkitExitFullscreen?.();
+      }
+    });
+
+    workspace.addEventListener('scroll', extendIfNeeded);
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const oldData = canvas.toDataURL();
+        const oldH = parseFloat(paper.style.height) || paper.offsetHeight;
+        init();
+        if (parseFloat(paper.style.height) < oldH) resizeCanvas(oldH);
+        const img = new Image();
+        img.onload = () => {
+          ctx.drawImage(img, 0, 0, canvas.width / (window.devicePixelRatio || 1), canvas.height / (window.devicePixelRatio || 1));
+          history[historyIndex] = canvas.toDataURL('image/png');
+        };
+        img.src = oldData;
+        clearSelection();
+      }, 180);
+    });
+
+    // ========== INICIO ==========
+    init();
+    document.body.className = 'tool-pen';
+    document.documentElement.style.setProperty('--grid-size', gridSize + 'px');
+
+    setTimeout(() => {
+      pageIndicator.style.opacity = '1';
+      setTimeout(() => pageIndicator.style.opacity = '0', 2800);
+    }, 900);
+  </script>
+</body>
+</html>
